@@ -1,0 +1,9 @@
+spring:
+  h2.console:
+    enabled: true
+    path: "/console"
+  datasource:
+    url: "jdbc:h2:file:C:/Users/48667/Desktop/ShopList/shoplist-db"
+  jpa:
+    hibernate:
+      ddl-auto: validate
