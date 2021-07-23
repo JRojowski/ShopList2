@@ -2,10 +2,10 @@ package io.github.JRojowski.ShopList.Model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "meals")
@@ -17,11 +17,18 @@ public class Meal {
     private String name;
     private String description;
     private String category;
+    @ManyToMany
+    @JoinTable(
+            name = "meals_food",
+            joinColumns = @JoinColumn(name = "food_id"),
+            inverseJoinColumns = @JoinColumn(name = "meal_id")
+    )
+    private Set<Meal> ingredients = new HashSet<>();
 
     public Meal() {
     }
 
-    int getId() {
+    public int getId() {
         return id;
     }
 
@@ -29,7 +36,7 @@ public class Meal {
         this.id = id;
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
@@ -37,9 +44,7 @@ public class Meal {
         this.name = name;
     }
 
-
-
-    String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -47,11 +52,25 @@ public class Meal {
         this.description = description;
     }
 
-    String getCategory() {
+    public String getCategory() {
         return category;
     }
 
     void setCategory(final String category) {
         this.category = category;
+    }
+
+    Set<Meal> getIngredients() {
+        return ingredients;
+    }
+
+    void setIngredients(final Set<Meal> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void updateFrom(final Meal source) {
+        name = source.name;
+        description = source.description;
+        category = source.category;
     }
 }

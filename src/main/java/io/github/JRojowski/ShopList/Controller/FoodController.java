@@ -25,7 +25,7 @@ class FoodController {
     }
 
     @PostMapping("/foods")
-    ResponseEntity<Food> createFood(@RequestBody @Valid Food toCreate) {
+    ResponseEntity<Food> createFood(@RequestBody Food toCreate) {
         Food result = repository.save(toCreate);
         logger.info("Food created successfully");
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);

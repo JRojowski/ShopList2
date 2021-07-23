@@ -2,10 +2,10 @@ package io.github.JRojowski.ShopList.Model;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "foods")
@@ -19,6 +19,8 @@ public class Food {
     private String description;
     private String category;
     private float price;
+    @ManyToMany(mappedBy = "ingredients")
+    private Set<Meal> meals = new HashSet<>();
 
     public Food() {
     }
@@ -69,6 +71,14 @@ public class Food {
 
     void setPrice(final float price) {
         this.price = price;
+    }
+
+    Set<Meal> getMeals() {
+        return meals;
+    }
+
+    void setMeals(final Set<Meal> meals) {
+        this.meals = meals;
     }
 
     public void updateFrom(final Food source) {
