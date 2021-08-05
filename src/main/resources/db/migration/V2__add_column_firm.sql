@@ -1,1 +1,0 @@
-alter table foods add column firm varchar(100);

@@ -1,4 +1,4 @@
-Create table meals_food(
+Create table meals_foods(
     meal_id int(11) NOT NULL,
     food_id int(11) NOT NULL,
     foreign key (meal_id) references meals(id),

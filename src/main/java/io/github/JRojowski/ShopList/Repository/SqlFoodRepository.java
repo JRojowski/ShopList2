@@ -1,7 +1,6 @@
-package io.github.JRojowski.ShopList.Adapter;
+package io.github.JRojowski.ShopList.Repository;
 
 import io.github.JRojowski.ShopList.Model.Food;
-import io.github.JRojowski.ShopList.Model.FoodRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

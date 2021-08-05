@@ -4,7 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,14 +15,23 @@ public class Food {
     private int id;
     private String name;
     private String firm;
-    private String description;
     private String category;
     private float price;
-    @ManyToMany(mappedBy = "ingredients")
+    private boolean inFridge;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ingredients")
     private Set<Meal> meals = new HashSet<>();
+
 
     public Food() {
     }
+
+    public Food(final String name, final String firm, final String category, final float price, final Set<Meal> meals) {
+        this.name = name;
+        this.firm = firm;
+        this.category = category;
+        this.price = price;
+    }
+
 
     public int getId() {
         return id;
@@ -49,14 +57,6 @@ public class Food {
         this.firm = firm;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    void setDescription(final String description) {
-        this.description = description;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -73,18 +73,25 @@ public class Food {
         this.price = price;
     }
 
-    Set<Meal> getMeals() {
+    public boolean isInFridge() {
+        return inFridge;
+    }
+
+    public void setInFridge(final boolean inFridge) {
+        this.inFridge = inFridge;
+    }
+
+    public Set<Meal> getMeals() {
         return meals;
     }
 
-    void setMeals(final Set<Meal> meals) {
+    public void setMeals(final Set<Meal> meals) {
         this.meals = meals;
     }
 
     public void updateFrom(final Food source) {
         name = source.name;
         firm = source.firm;
-        description = source.description;
         category = source.category;
         price = source.price;
     }

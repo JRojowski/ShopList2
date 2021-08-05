@@ -4,7 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,18 +14,23 @@ public class Meal {
     @GenericGenerator(name = "inc", strategy = "increment")
     private int id;
     private String name;
-    private String description;
-    private String category;
-    @ManyToMany
-    @JoinTable(
-            name = "meals_food",
-            joinColumns = @JoinColumn(name = "food_id"),
-            inverseJoinColumns = @JoinColumn(name = "meal_id")
-    )
-    private Set<Meal> ingredients = new HashSet<>();
+    private String type;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "meals_foods",
+            joinColumns = {@JoinColumn(name = "meal_id")},
+            inverseJoinColumns = {@JoinColumn(name = "food_id")})
+    private Set<Food> ingredients = new HashSet<>();
+
 
     public Meal() {
     }
+
+    public Meal(final String name, final String type, final Set<Food> ingredients) {
+        this.name = name;
+        this.type = type;
+        this.ingredients = ingredients;
+    }
+
 
     public int getId() {
         return id;
@@ -44,33 +48,30 @@ public class Meal {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getType() {
+        return type;
     }
 
-    void setDescription(final String description) {
-        this.description = description;
+    void setType(final String type) {
+        this.type = type;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    void setCategory(final String category) {
-        this.category = category;
-    }
-
-    Set<Meal> getIngredients() {
+    public Set<Food> getIngredients() {
         return ingredients;
     }
 
-    void setIngredients(final Set<Meal> ingredients) {
+    void setIngredients(final Set<Food> ingredients) {
         this.ingredients = ingredients;
     }
 
     public void updateFrom(final Meal source) {
         name = source.name;
-        description = source.description;
-        category = source.category;
+        type = source.type;
+        ingredients = source.ingredients;
     }
 }
+
+
+
+
+

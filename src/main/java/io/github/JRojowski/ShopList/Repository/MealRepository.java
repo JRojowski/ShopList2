@@ -1,5 +1,6 @@
-package io.github.JRojowski.ShopList.Model;
+package io.github.JRojowski.ShopList.Repository;
 
+import io.github.JRojowski.ShopList.Model.Meal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
