@@ -25,6 +25,13 @@ public class Food {
     public Food() {
     }
 
+    public Food(final String name, final Meal meal) {
+        this.name = name;
+        Set<Meal> meals = new HashSet<>();
+        meals.add(meal);
+        this.meals = meals;
+    }
+
     public Food(final String name, final String firm, final String category, final float price, final Set<Meal> meals) {
         this.name = name;
         this.firm = firm;

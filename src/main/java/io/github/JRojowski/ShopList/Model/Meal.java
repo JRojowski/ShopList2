@@ -44,7 +44,7 @@ public class Meal {
         return name;
     }
 
-    void setName(final String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -52,7 +52,7 @@ public class Meal {
         return type;
     }
 
-    void setType(final String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
@@ -60,7 +60,7 @@ public class Meal {
         return ingredients;
     }
 
-    void setIngredients(final Set<Food> ingredients) {
+    public void setIngredients(final Set<Food> ingredients) {
         this.ingredients = ingredients;
     }
 
