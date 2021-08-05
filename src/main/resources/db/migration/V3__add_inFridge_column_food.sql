@@ -1,0 +1,1 @@
+alter table foods add column in_fridge bit;
